@@ -225,6 +225,16 @@ img {
   filter: grayscale(var(--image-grayscale)) opacity(var(--image-opacity));
 }
 
+/* REMOVE SETAS DOS CAMPOS DE NÚMERO */
+  input[type=number]::-webkit-inner-spin-button, 
+  input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+  }
+  input[type=number] {
+    -moz-appearance: textfield; /* Para Firefox */
+  }
+
 `;
 
 export default GlobalStyles;

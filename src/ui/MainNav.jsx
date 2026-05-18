@@ -1,11 +1,10 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import {
-  HiOutlineHome,
-  HiOutlineCalendarDays,
   HiOutlineHomeModern,
-  HiOutlineUsers,
-  HiOutlineCog6Tooth,
+  HiOutlineCalendarDays,
+  HiOutlineHeart,
+  HiOutlineInboxArrowDown,
 } from "react-icons/hi2";
 
 const NavList = styled.ul`
@@ -20,7 +19,8 @@ const StyledNavLink = styled(NavLink)`
     display: flex;
     align-items: center;
     gap: 1.2rem;
-    color: var(--color-grey-400);
+
+    color: var(--color-grey-600);
     font-size: 1.6rem;
     font-weight: 500;
     padding: 1.2rem 2.4rem;
@@ -31,8 +31,8 @@ const StyledNavLink = styled(NavLink)`
   &:active,
   &.active:link,
   &.active:visited {
-    color: #c4a764;
-    background-color: rgba(196, 167, 100, 0.1);
+    color: var(--color-grey-800);
+    background-color: var(--color-grey-50);
     border-radius: var(--border-radius-sm);
   }
 
@@ -47,42 +47,36 @@ const StyledNavLink = styled(NavLink)`
   &:active svg,
   &.active:link svg,
   &.active:visited svg {
-    color: #c4a764;
+    color: var(--color-brand-600);
   }
 `;
 
-function MainNav({ onClose }) {
+function MainNav() {
   return (
     <nav>
       <NavList>
         <li>
-          <StyledNavLink to="/dashboard" onClick={onClose}>
-            <HiOutlineHome />
-            <span>Início</span>
-          </StyledNavLink>
-        </li>
-        <li>
-          <StyledNavLink to="/contratos" onClick={onClose}>
-            <HiOutlineCalendarDays />
-            <span>Aluguéis</span>
-          </StyledNavLink>
-        </li>
-        <li>
-          <StyledNavLink to="/imoveis" onClick={onClose}>
+          <StyledNavLink to="/imoveis">
             <HiOutlineHomeModern />
-            <span>Imóveis</span>
+            <span>Meus Imóveis</span>
           </StyledNavLink>
         </li>
         <li>
-          <StyledNavLink to="/corretores" onClick={onClose}>
-            <HiOutlineUsers />
-            <span>Corretores</span>
+          <StyledNavLink to="/visitas">
+            <HiOutlineCalendarDays />
+            <span>Visitas Agendadas</span>
           </StyledNavLink>
         </li>
         <li>
-          <StyledNavLink to="/configuracoes" onClick={onClose}>
-            <HiOutlineCog6Tooth />
-            <span>Configurações</span>
+          <StyledNavLink to="/captacoes">
+            <HiOutlineInboxArrowDown />
+            <span>Captação (Leads)</span>
+          </StyledNavLink>
+        </li>
+        <li>
+          <StyledNavLink to="/favoritos">
+            <HiOutlineHeart />
+            <span>Interesses (Favoritos)</span>
           </StyledNavLink>
         </li>
       </NavList>

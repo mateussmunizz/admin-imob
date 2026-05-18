@@ -8,10 +8,11 @@ const StyledTable = styled.div`
   border-radius: 7px;
 
   @media (max-width: 768px) {
-    display: block;
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    border: none;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
   }
 `;
 
@@ -31,6 +32,10 @@ const StyledHeader = styled(CommonRow)`
   letter-spacing: 0.4px;
   font-weight: 600;
   color: var(--color-grey-600);
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const StyledRow = styled(CommonRow)`
@@ -40,10 +45,34 @@ const StyledRow = styled(CommonRow)`
   &:not(:last-child) {
     border-bottom: 1px solid var(--color-grey-100);
   }
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.2rem;
+    padding: 2rem;
+    background-color: var(--color-grey-0);
+    border: 1px solid var(--color-grey-200);
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+
+    &:not(:last-child) {
+      border-bottom: 1px solid var(--color-grey-200);
+    }
+
+    & > * {
+      width: 100%;
+    }
+  }
 `;
 
 const StyledBody = styled.section`
   margin: 0.4rem 0;
+
+  @media (max-width: 768px) {
+    margin: 0;
+  }
 `;
 
 const Footer = styled.footer`
@@ -54,6 +83,11 @@ const Footer = styled.footer`
 
   &:not(:has(*)) {
     display: none;
+  }
+
+  @media (max-width: 768px) {
+    border-radius: 8px;
+    border: 1px solid var(--color-grey-200);
   }
 `;
 

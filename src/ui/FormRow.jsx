@@ -28,6 +28,21 @@ const StyledFormRow = styled.div`
     display: flex;
     justify-content: flex-end;
     gap: 1.2rem;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      width: 100%;
+      & > button {
+        width: 100%;
+      }
+    }
+  }
+
+  /* Garante que os inputs internos ocupem a largura toda no mobile */
+  & > *:nth-child(2) {
+    @media (max-width: 768px) {
+      width: 100%;
+    }
   }
 `;
 

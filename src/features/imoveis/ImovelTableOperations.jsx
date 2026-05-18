@@ -6,11 +6,11 @@ function ImovelTableOperations() {
   return (
     <TableOperations>
       <Filter
-        filterField="discount"
+        filterField="tipo_negocio"
         options={[
           { value: "all", label: "Todos" },
-          { value: "no-discount", label: "Sem desconto" },
-          { value: "with-discount", label: "Com desconto" },
+          { value: "locacao", label: "Locação" },
+          { value: "venda", label: "Venda" },
         ]}
       />
 
@@ -20,20 +20,14 @@ function ImovelTableOperations() {
           { value: "name-desc", label: "Ordenar por nome (Z-A)" },
           {
             value: "regularPrice-asc",
-            label: "Ordenar por preço (menor primeiro)",
+            label: "Ordenar por preço (Menor primeiro)",
           },
           {
             value: "regularPrice-desc",
-            label: "Ordenar por preço (maior primeiro)",
+            label: "Ordenar por preço (Maior primeiro)",
           },
-          {
-            value: "maxCapacity-asc",
-            label: "Ordenar por capacidade (menor primeiro)",
-          },
-          {
-            value: "maxCapacity-desc",
-            label: "Ordenar por capacidade (maior primeiro)",
-          },
+          { value: "area_m2-desc", label: "Ordenar por área (Maior primeiro)" },
+          { value: "created_at-desc", label: "Mais recentes primeiro" },
         ]}
       />
     </TableOperations>

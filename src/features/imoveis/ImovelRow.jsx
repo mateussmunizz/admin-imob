@@ -10,25 +10,38 @@ import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
 
 const Imovel = styled.div`
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 600;
   color: var(--color-grey-600);
   font-family: "Sono";
 `;
 
-const Price = styled.div`
-  font-family: "Sono";
+const NegocioTag = styled.span`
+  background-color: var(--color-brand-100);
+  color: var(--color-brand-700);
+  padding: 0.4rem 1.2rem;
+  border-radius: 100px;
+  font-size: 1.2rem;
   font-weight: 600;
+  text-transform: uppercase;
+  display: inline-block;
+  width: max-content;
 `;
 
-const Discount = styled.div`
-  font-family: "Sono";
-  font-weight: 500;
+const VendaTag = styled(NegocioTag)`
+  background-color: var(--color-green-100);
   color: var(--color-green-700);
 `;
 
-const Capacity = styled.div`
-  font-size: 1.4rem;
+const Price = styled.div`
+  font-family: "Sono";
+  font-weight: 600;
+  font-size: 1.5rem;
+`;
+
+const Info = styled.div`
+  font-size: 1.3rem;
+  color: var(--color-grey-500);
 `;
 
 const Img = styled.img`
@@ -37,46 +50,85 @@ const Img = styled.img`
   aspect-ratio: 3 / 2;
   object-fit: cover;
   object-position: center;
-  transform: scale(1.5) translateX(-7px);
+  transform: scale(1.3) translateX(-4px);
+  border-radius: 4px;
 `;
 
 function ImovelRow({ imovel }) {
   const { isDeleting, deleteImovel } = useDeleteImovel();
   const { isCreating, createImovel } = useCreateImovel();
 
+  // ATUALIZADO: Buscamos os campos novos que você criou no banco
   const {
     id: imovelId,
     name,
-    maxCapacity,
     regularPrice,
-    discount,
     image,
     description,
+    tipo_negocio,
+    area_m2,
+    quartos,
+    galeria_imagens,
+    endereco,
+    valor_condominio,
+    valor_iptu,
+    vagas,
+    banheiros,
+    aceita_pet,
+    mobiliado,
   } = imovel;
 
+  // ATUALIZADO: Duplicação copia todos os dados novos
   function handleDuplicate() {
     createImovel({
       name: `Cópia de ${name}`,
-      maxCapacity,
       regularPrice,
-      discount,
       image,
       description,
+      tipo_negocio,
+      area_m2,
+      quartos,
+      galeria_imagens,
+      endereco,
+      valor_condominio,
+      valor_iptu,
+      vagas,
+      banheiros,
+      aceita_pet,
+      mobiliado,
     });
   }
 
+  // Previne erro caso a imagem venha nula do banco
+  const imagemSegura = image || "https://placehold.co/150x100?text=Sem+Foto";
+
   return (
     <Table.Row>
-      <Img src={image} />
-      <Imovel>{name}</Imovel>
-      {/* ALTERAÇÃO AQUI: Mudado para 'Até X moradores' */}
-      <Capacity>Até {maxCapacity} moradores</Capacity>
-      <Price>{formatCurrency(regularPrice)}</Price>
-      {discount ? (
-        <Discount>{formatCurrency(discount)}</Discount>
-      ) : (
-        <span>&mdash;</span>
-      )}
+      <Img src={imagemSegura} />
+
+      <div style={{ display: "flex", flexDirection: "column", gap: "0.2rem" }}>
+        <Imovel>{name}</Imovel>
+        <Info>{endereco?.split(",")[0] || "Endereço não informado"}</Info>
+      </div>
+
+      <div>
+        {tipo_negocio === "venda" ? (
+          <VendaTag>Venda</VendaTag>
+        ) : (
+          <NegocioTag>Aluguel</NegocioTag>
+        )}
+      </div>
+
+      <div style={{ display: "flex", flexDirection: "column", gap: "0.2rem" }}>
+        <span style={{ fontWeight: 500 }}>{area_m2}m²</span>
+        <Info>
+          {quartos} qtos • {vagas} vagas
+        </Info>
+      </div>
+
+      <div style={{ display: "flex", flexDirection: "column", gap: "0.2rem" }}>
+        <Price>{formatCurrency(regularPrice)}</Price>
+      </div>
 
       <div>
         <Modal>
@@ -84,7 +136,11 @@ function ImovelRow({ imovel }) {
             <Menus.Toggle id={imovelId} />
 
             <Menus.List id={imovelId}>
-              <Menus.Button icon={<HiSquare2Stack />} onClick={handleDuplicate}>
+              <Menus.Button
+                icon={<HiSquare2Stack />}
+                onClick={handleDuplicate}
+                disabled={isCreating}
+              >
                 Duplicar
               </Menus.Button>
 
