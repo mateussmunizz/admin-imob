@@ -6,18 +6,23 @@ import Heading from "../ui/Heading";
 const LoginLayout = styled.main`
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 48rem;
+  grid-template-columns: 100%;
   align-content: center;
   justify-content: center;
   gap: 3.2rem;
   background-color: var(--color-grey-50);
+  padding: 0 2rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 48rem;
+  }
 `;
 
 function Login() {
   return (
     <LoginLayout>
       <Logo />
-      <Heading as="h4">Log in to your account</Heading>
+      <Heading as="h4">Faça o login na sua conta</Heading>
       <LoginForm />
     </LoginLayout>
   );
